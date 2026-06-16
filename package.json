@@ -1,0 +1,65 @@
+{
+  "name": "biguo",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "避过 · 这地方，避过吗？基于 12315、黑猫投诉、文旅通报等真实数据的城市避雷工具",
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "lint": "eslint . --ext .js,.ts,.vue",
+    "lint:fix": "eslint . --ext .js,.ts,.vue --fix",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
+    "crawl": "tsx crawler/crawl.ts",
+    "crawl:full": "tsx crawler/crawl.ts -- --limit=999"
+  },
+  "dependencies": {
+    "@element-plus/nuxt": "^1.1.1",
+    "@lucide/vue": "^1.16.0",
+    "@nuxt/icon": "^1.10.3",
+    "@nuxt/ui": "^3.3.7",
+    "@nuxtjs/supabase": "^2.0.9",
+    "@pinia/nuxt": "^0.11.3",
+    "@vueuse/core": "^12.4.0",
+    "@vueuse/nuxt": "^12.4.0",
+    "echarts": "^6.1.0",
+    "element-plus": "^2.9.3",
+    "nuxt": "^3.15.1",
+    "pinia": "^3.0.4",
+    "pinia-plugin-persistedstate": "^4.7.1",
+    "vue": "^3.5.13",
+    "vue-echarts": "^8",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@iconify-json/lucide": "^1.2.110",
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^22.10.5",
+    "@typescript-eslint/eslint-plugin": "^8.61.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^10.4.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.9.2",
+    "globals": "^17.6.0",
+    "nuxt-echarts": "^1.0.1",
+    "postcss": "^8.4.49",
+    "prettier": "^3.8.4",
+    "sass": "^1.100.0",
+    "tailwindcss": "^4.3.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.61.0",
+    "vue-eslint-parser": "^10.4.1",
+    "vue-tsc": "^2.2.0"
+  },
+  "resolutions": {
+    "@nuxt/schema": "3.17.5"
+  }
+}
