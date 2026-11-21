@@ -28,3 +28,9 @@ logs
 
 # 采集器输出（原始数据，不入库）
 crawler/output
+
+# 统一使用 yarn，禁止 npm 生成的锁文件
+package-lock.json
+
+src/pages/web/
+stats/

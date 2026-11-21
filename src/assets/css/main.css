@@ -18,6 +18,7 @@
 html,
 body,
 #__nuxt {
+  min-width: 1200px;
   height: 100%;
 }
 
@@ -35,10 +36,10 @@ body {
 
 @layer components {
   /* ============================================================
-   * 容器：PC 固定 1200，居中
+   * 容器：大屏最大 1200，小屏跟随视口，避免固定宽度溢出
    * ============================================================ */
   .container-page {
-    @apply mx-auto w-[1200px] px-0;
+    @apply mx-auto w-full max-w-[1200px] px-4 xl:px-0;
   }
 
   .section {

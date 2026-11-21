@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: '避雷地图 · 避过',
-  description: '基于真实投诉数据的全国避雷热力图',
-})
+  title: "避雷地图 · 避过",
+  description: "基于真实投诉数据的全国避雷热力图",
+});
 </script>

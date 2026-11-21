@@ -13,5 +13,5 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: '行前清单 · 避过' })
+useSeoMeta({ title: "行前清单 · 避过" });
 </script>

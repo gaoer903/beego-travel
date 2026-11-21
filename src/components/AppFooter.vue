@@ -5,18 +5,25 @@
         <div>
           <BrandLogo />
           <p class="mt-3 text-sm text-gray-500">
-            基于 12315、黑猫投诉、文旅通报<br />
+            基于 12315、黑猫投诉、文旅通报
+            <br />
             等公开真实数据的城市避雷工具。
           </p>
         </div>
 
-        <div v-for="group in footerLinks" :key="group.title">
+        <div
+          v-for="group in footerLinks"
+          :key="group.title"
+        >
           <h4 class="text-sm font-semibold text-gray-900">{{ group.title }}</h4>
           <ul class="mt-3 space-y-2">
-            <li v-for="link in group.links" :key="link.to">
+            <li
+              v-for="link in group.links"
+              :key="link.to"
+            >
               <NuxtLink
                 :to="link.to"
-                class="text-sm text-gray-500 transition-colors hover:text-brand-600"
+                class="hover:text-brand-600 text-sm text-gray-500 transition-colors"
               >
                 {{ link.label }}
               </NuxtLink>
@@ -36,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-const { footerLinks } = useNavigation()
-const year = new Date().getFullYear()
-const config = useRuntimeConfig()
+const { footerLinks } = useNavigation();
+const year = new Date().getFullYear();
+const config = useRuntimeConfig();
 </script>

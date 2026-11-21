@@ -3,12 +3,16 @@
     <div class="flex items-center justify-between px-5 pt-5 pb-3">
       <div>
         <h3 class="heading-3">国内避雷热力图</h3>
-        <p class="mt-0.5 text-xs text-muted">滚轮缩放 · 拖拽平移</p>
+        <p class="text-muted mt-0.5 text-xs">滚轮缩放 · 拖拽平移</p>
       </div>
-      <Icon name="i-lucide:map-minus" size="20" class="text-brand-400" />
+      <Icon
+        name="i-lucide:map-minus"
+        size="20"
+        class="text-brand-400"
+      />
     </div>
 
-    <div class="risk-map-shell min-h-[360px] flex-1 w-full bg-[#f7fffb] sm:min-h-[400px]">
+    <div class="risk-map-shell min-h-[360px] w-full flex-1 bg-[#f7fffb] sm:min-h-[400px]">
       <VChart
         v-if="isMapLoaded"
         class="risk-map-chart block h-full w-full"
@@ -17,7 +21,7 @@
       />
       <div
         v-else
-        class="flex h-full items-center justify-center text-sm text-muted"
+        class="text-muted flex h-full items-center justify-center text-sm"
       >
         地图加载中…
       </div>

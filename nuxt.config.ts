@@ -1,5 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { defineNuxtConfig } from "nuxt/config";
+import { visualizer } from "rollup-plugin-visualizer";
 import { customRoutes } from "./src/app/router";
 
 const r = (p: string) => fileURLToPath(new URL(p, import.meta.url));
@@ -7,6 +8,10 @@ const r = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 export default defineNuxtConfig({
   compatibilityDate: "2025-01-01",
   devtools: { enabled: true },
+  sourcemap: {
+    client: process.env.NODE_ENV !== "production",
+    server: false,
+  },
 
   /**
    * 全部源码集中在 src/ 目录：
@@ -47,6 +52,7 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@nuxt/ui",
     "nuxt-echarts",
+    "@nuxt/image",
   ],
 
   /**
@@ -115,6 +121,39 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    plugins:
+      process.env.ANALYZE === "true"
+        ? [
+            visualizer({
+              filename: "stats/client.html",
+              template: "treemap",
+              gzipSize: true,
+              brotliSize: true,
+              open: true,
+            }),
+          ]
+        : [],
+  },
+
+  nitro: {
+    /**
+     * 预压缩 _nuxt/* 等静态资源，构建时生成 .gz/.br，
+     * Nitro 按 Accept-Encoding 返回压缩版（动态 SSR HTML 由 server/plugins/compress.ts 处理）。
+     * 若线上前置 Nginx/CDN 已做压缩，可移除此项与 compress 插件。
+     */
+    compressPublicAssets: { gzip: true, brotli: true },
+  },
+
+  // 图片处理：使用内置 ipx provider 在开发环境下进行运行时转换
+  image: {
+    provider: "ipx",
+    dir: "../public",
+    ipx: {
+      baseURL: "/_ipx",
+    },
+  },
+
   runtimeConfig: {
     deepseekApiKey: process.env.NUXT_DEEPSEEK_API_KEY || "",
     deepseekBaseUrl: process.env.NUXT_DEEPSEEK_BASE_URL || "https://api.deepseek.com",
@@ -123,9 +162,25 @@ export default defineNuxtConfig({
       appName: "避过",
       appSlogan: "这地方，避过吗？",
       appVersion: "0.2.0",
-      SUPABASE_URL: process.env.SUPABASE_URL,
-      SUPABASE_KEY: process.env.SUPABASE_PUBLISHABLE_KEY,
+      BD_API_KEY: process.env.VITE_BD_MAP_KEY || "",
     },
+  },
+
+  routeRules: {
+    // 地图静态数据：内容基本不变，设一年 immutable 强缓存，跳过 304 协商请求
+    "/maps/**": {
+      headers: {
+        "cache-control": "public, max-age=31536000, immutable",
+      },
+    },
+    // 详情页：数据按 id/slug 动态加载，不需要 SSR，改为纯客户端渲染（SPA 模式）
+    // 服务端只返回空壳 HTML，页面内容在浏览器端渲染
+    "/incidents/**": { ssr: false },
+    "/cities/**": { ssr: false },
+    "/spots/**": { ssr: false },
+    "/assess/**": { ssr: false },
+    "/cases/**": { ssr: false },
+    "/web-learning/**": { ssr: false },
   },
 
   supabase: {

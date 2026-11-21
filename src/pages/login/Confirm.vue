@@ -3,61 +3,66 @@
     <UCard class="w-full max-w-md">
       <div class="flex flex-col items-center py-4 text-center">
         <!-- Brand -->
-        <h1 class="text-3xl font-bold text-primary">
+        <h1 class="text-primary text-3xl font-bold">
           避过
           <span class="text-brand-500 text-2xl">BeeGo</span>
         </h1>
 
-        <p class="mt-2 text-sm text-muted">避开踩坑，发现真实体验</p>
+        <p class="text-muted mt-2 text-sm">避开踩坑，发现真实体验</p>
 
         <!-- Loading -->
         <template v-if="status === 'loading'">
-          <div
-            class="mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"
-          >
+          <div class="bg-primary/10 mt-8 flex h-16 w-16 items-center justify-center rounded-full">
             <UIcon
               name="i-lucide-loader-circle"
-              class="h-8 w-8 animate-spin text-primary"
+              class="text-primary h-8 w-8 animate-spin"
             />
           </div>
 
           <h2 class="mt-6 text-lg font-semibold">正在验证登录</h2>
 
-          <p class="mt-2 text-sm text-muted">请稍候，我们正在确认您的身份</p>
+          <p class="text-muted mt-2 text-sm">请稍候，我们正在确认您的身份</p>
 
-          <UProgress animation="carousel" class="mt-6 w-full" />
+          <UProgress
+            animation="carousel"
+            class="mt-6 w-full"
+          />
         </template>
 
         <!-- Success -->
         <template v-else-if="status === 'success'">
-          <div
-            class="mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-success/10"
-          >
+          <div class="bg-success/10 mt-8 flex h-16 w-16 items-center justify-center rounded-full">
             <UIcon
               name="i-lucide-circle-check-big"
-              class="h-8 w-8 text-success"
+              class="text-success h-8 w-8"
             />
           </div>
 
           <h2 class="mt-6 text-lg font-semibold">登录成功</h2>
-          <p class="mt-2 text-sm text-muted">正在返回之前访问的页面...</p>
+          <p class="text-muted mt-2 text-sm">正在返回之前访问的页面...</p>
         </template>
 
         <!-- Error -->
         <template v-else>
-          <div
-            class="mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-error/10"
-          >
-            <UIcon name="i-lucide-circle-alert" class="h-8 w-8 text-error" />
+          <div class="bg-error/10 mt-8 flex h-16 w-16 items-center justify-center rounded-full">
+            <UIcon
+              name="i-lucide-circle-alert"
+              class="text-error h-8 w-8"
+            />
           </div>
 
           <h2 class="mt-6 text-lg font-semibold">登录失败</h2>
 
-          <p class="mt-2 text-sm text-muted">
+          <p class="text-muted mt-2 text-sm">
             {{ errorMessage }}
           </p>
 
-          <UButton class="mt-6" to="/"> 返回首页 </UButton>
+          <UButton
+            class="mt-6"
+            to="/"
+          >
+            返回首页
+          </UButton>
         </template>
       </div>
     </UCard>

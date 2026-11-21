@@ -13,10 +13,13 @@
           :class="
             tool.highlight
               ? 'bg-brand-100 text-brand-700'
-              : 'bg-gray-100 text-gray-700 group-hover:bg-brand-100 group-hover:text-brand-700'
+              : 'group-hover:bg-brand-100 group-hover:text-brand-700 bg-gray-100 text-gray-700'
           "
         >
-          <Icon :name="tool.icon" size="20" />
+          <Icon
+            :name="tool.icon"
+            size="20"
+          />
         </span>
         <div class="min-w-0 flex-1">
           <div class="truncate text-sm font-semibold text-gray-900">
@@ -27,7 +30,7 @@
         <Icon
           name="lucide:chevron-right"
           size="16"
-          class="text-gray-300 group-hover:text-brand-500"
+          class="group-hover:text-brand-500 text-gray-300"
         />
       </NuxtLink>
     </div>
@@ -35,5 +38,5 @@
 </template>
 
 <script setup lang="ts">
-import { TOOL_ENTRIES } from '~/utils/mock'
+import { TOOL_ENTRIES } from "~/utils/mock";
 </script>

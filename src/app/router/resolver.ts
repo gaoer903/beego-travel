@@ -1,4 +1,4 @@
-import { createResolver } from '@nuxt/kit'
+import { createResolver } from "@nuxt/kit";
 
 /**
  * 路由 file 字段路径助手
@@ -14,6 +14,6 @@ import { createResolver } from '@nuxt/kit'
  * 注意：Nuxt 的 dir.pages 已被改为 '_pages_unused'（见 nuxt.config.ts），
  * 因此 pages/ 目录不会被 Nuxt 自动扫描成文件式路由，只供本助手手动引用。
  */
-const { resolve } = createResolver(import.meta.url)
+const { resolve } = createResolver(import.meta.url);
 
-export const view = (p: string) => resolve(`../../pages/${p}`)
+export const view = (p: string) => resolve(`../../pages/${p}`);

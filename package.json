@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "避过 · 这地方，避过吗？基于 12315、黑猫投诉、文旅通报等真实数据的城市避雷工具",
+  "packageManager": "yarn@1.22.22",
   "engines": {
     "node": ">=20.12.0"
   },
@@ -20,9 +21,11 @@
     "crawl:full": "tsx crawler/crawl.ts -- --limit=999"
   },
   "dependencies": {
+    "@baidumap/vue-bmap": "^1.0.5",
     "@element-plus/nuxt": "^1.1.1",
     "@lucide/vue": "^1.16.0",
     "@nuxt/icon": "^1.10.3",
+    "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^3.3.7",
     "@nuxtjs/supabase": "^2.0.9",
     "@pinia/nuxt": "^0.11.3",
@@ -30,6 +33,7 @@
     "@vueuse/nuxt": "^12.4.0",
     "echarts": "^6.1.0",
     "element-plus": "^2.9.3",
+    "ioredis": "^5.10.1",
     "nuxt": "^3.15.1",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
@@ -38,6 +42,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@baidumap/jsapi-v4-types": "^4.0.6",
     "@eslint/js": "^10.0.1",
     "@iconify-json/lucide": "^1.2.110",
     "@tailwindcss/postcss": "^4.3.0",
@@ -51,6 +56,8 @@
     "nuxt-echarts": "^1.0.1",
     "postcss": "^8.4.49",
     "prettier": "^3.8.4",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "rollup-plugin-visualizer": "^7.0.1",
     "sass": "^1.100.0",
     "tailwindcss": "^4.3.0",
     "tsx": "^4.19.2",
@@ -60,6 +67,9 @@
     "vue-tsc": "^2.2.0"
   },
   "resolutions": {
+    "@nuxt/schema": "3.17.5"
+  },
+  "overrides": {
     "@nuxt/schema": "3.17.5"
   }
 }

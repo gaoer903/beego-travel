@@ -2,10 +2,10 @@
   <header
     class="home-header sticky top-0 z-40 w-full border-b border-gray-100 bg-white/85 backdrop-blur-md"
   >
-    <div class="container-page w-[1200px] flex h-16 items-center justify-between gap-4">
+    <div class="container-page flex h-16 items-center justify-between gap-4">
       <BrandLogo />
 
-      <nav class="flex items-center justify-between w-[450px]">
+      <nav class="flex w-[450px] items-center justify-between">
         <NuxtLink
           v-for="item in mainNav"
           :key="item.to"
@@ -17,15 +17,20 @@
               : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
           "
         >
-          <Icon v-if="item.icon" :name="item.icon" size="16" class="opacity-70 mr-[4px]" />
+          <Icon
+            v-if="item.icon"
+            :name="item.icon"
+            size="16"
+            class="mr-[4px] opacity-70"
+          />
           {{ item.label }}
         </NuxtLink>
       </nav>
 
-      <div class="flex items-center justify-between w-[480px]">
+      <div class="flex w-[480px] items-center justify-between">
         <UButton
           icon="lucide:circle-gauge"
-          class="rounded-full bg-risk-high shadow-soft cursor-pointer hover:bg-risk-high/80 text-white"
+          class="bg-risk-high shadow-soft hover:bg-risk-high/80 cursor-pointer rounded-full text-white"
           @click="handleReport"
         >
           举报一个坑
@@ -39,31 +44,31 @@
           生成避雷情报卡
         </UButton>
 
-        <el-dropdown trigger="hover" :hide-on-click="false">
+        <UDropdownMenu
+          :items="assistantItems"
+          :content="{
+            align: 'center',
+            sideOffset: 8,
+          }"
+          :ui="{
+            content: 'w-56 rounded-lg shadow-lg',
+          }"
+        >
           <div
-            class="flex cursor-pointer items-center gap-1.5 rounded-full bg-brand-50 px-2 py-2.5 text-[12px] font-medium text-brand-700 hover:bg-brand-100"
+            class="bg-brand-50 text-brand-700 hover:bg-brand-100 flex cursor-pointer items-center gap-1.5 rounded-full px-2 py-2.5 text-[12px] font-medium transition-colors"
           >
-            <Icon name="lucide:bot-message-square" size="14" />
+            <Icon
+              name="lucide:bot-message-square"
+              size="14"
+            />
             <span>避避助手</span>
-            <Icon name="lucide:chevron-down" size="12" class="text-brand-700/70" />
+            <Icon
+              name="lucide:chevron-down"
+              size="12"
+              class="text-brand-700/70"
+            />
           </div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>
-                <Icon name="lucide:bot" size="16" class="mr-2" />
-                打招呼问问避避
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <Icon name="lucide:message-square" size="16" class="mr-2" />
-                提交一个问题
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <Icon name="lucide:lightbulb" size="16" class="mr-2" />
-                给避避喂数据
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+        </UDropdownMenu>
 
         <UPopover
           v-model:open="isUserMenuOpen"
@@ -78,12 +83,15 @@
         >
           <!-- Trigger -->
           <div
-            class="flex cursor-pointer items-center gap-1 rounded-full bg-brand-100 px-2 py-1 transition-colors hover:bg-brand-300"
+            class="bg-brand-100 hover:bg-brand-300 flex cursor-pointer items-center gap-1 rounded-full px-2 py-1 transition-colors"
             :class="isUserMenuOpen ? 'bg-brand-300' : ''"
           >
-            <UAvatar :src="userStore.user?.avatar" size="sm" />
+            <UAvatar
+              :src="userStore.user?.avatar"
+              size="sm"
+            />
 
-            <span class="text-sm font-medium"> 我的 </span>
+            <span class="text-sm font-medium">我的</span>
 
             <UIcon
               name="i-lucide-chevron-down"
@@ -96,13 +104,16 @@
 
           <!-- Panel -->
           <template #content>
-            <div class="w-64 overflow-hidden bg-white rounded-lg shadow-lg">
+            <div class="w-64 overflow-hidden rounded-lg bg-white shadow-lg">
               <!-- 登录状态 -->
               <template v-if="isLogin">
                 <!-- 用户信息 -->
-                <div class="flex items-center gap-3 border-brand-100 p-4">
-                  <UAvatar :src="userStore.user?.avatar" size="md" />
-                  <span class="font-medium text-brand-600">{{ user?.email }}</span>
+                <div class="border-brand-100 flex items-center gap-3 p-4">
+                  <UAvatar
+                    :src="userStore.user?.avatar"
+                    size="md"
+                  />
+                  <span class="text-brand-600 font-medium">{{ user?.email }}</span>
                 </div>
 
                 <!-- 菜单 -->
@@ -111,11 +122,11 @@
                     v-for="item in userMenu"
                     :key="item.to"
                     :to="item.to"
-                    class="group flex gap-3 rounded-lg px-3 py-3 transition-colors hover:bg-brand-500 hover:text-white"
+                    class="group hover:bg-brand-500 flex gap-3 rounded-lg px-3 py-3 transition-colors hover:text-white"
                   >
                     <UIcon
                       :name="item.icon"
-                      class="mt-0.5 size-4 shrink-0 text-brand-600 group-hover:text-brand-50"
+                      class="text-brand-600 group-hover:text-brand-50 mt-0.5 size-4 shrink-0"
                     />
 
                     <div>
@@ -123,7 +134,10 @@
                         {{ item.label }}
                       </div>
 
-                      <div v-if="item.sub" class="text-xs text-gray-500">
+                      <div
+                        v-if="item.sub"
+                        class="text-xs text-gray-500"
+                      >
                         {{ item.sub }}
                       </div>
                     </div>
@@ -131,7 +145,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="border-t border-brand-100 p-2">
+                <div class="border-brand-100 border-t p-2">
                   <UButton
                     block
                     color="error"
@@ -151,7 +165,12 @@
 
                   <div class="mt-1 text-sm text-gray-500">收藏城市、举报雷点、同步个人数据</div>
 
-                  <UButton block class="mt-4" icon="i-lucide-log-in" @click="handleLoginModalOpen">
+                  <UButton
+                    block
+                    class="mt-4"
+                    icon="i-lucide-log-in"
+                    @click="handleLoginModalOpen"
+                  >
                     立即登录
                   </UButton>
                 </div>
@@ -182,45 +201,38 @@ const props = defineProps<{
   loginModal: boolean;
 }>();
 
+const assistantItems = [
+  [
+    {
+      label: "打招呼问问避避",
+      icon: "i-lucide-bot",
+      onSelect: () => {
+        console.log("打招呼");
+      },
+    },
+    {
+      label: "提交一个问题",
+      icon: "i-lucide-message-square",
+      onSelect: () => {
+        console.log("提交问题");
+      },
+    },
+    {
+      label: "给避避喂数据",
+      icon: "i-lucide-lightbulb",
+      onSelect: () => {
+        console.log("喂数据");
+      },
+    },
+  ],
+];
+
 const emits = defineEmits(["update:login-modal"]);
 
 const isActive = (to: string) => route.path === to || route.path.startsWith(to + "/");
-
-const userMenuItems = computed(() => {
-  if (!isLogin.value) {
-    return [
-      [
-        {
-          label: "立即登录",
-          icon: "i-lucide-log-in",
-          onSelect: () => handleLoginModalOpen(),
-        },
-      ],
-    ];
-  }
-
-  return [
-    userMenu.map((item) => ({
-      label: item.label,
-      icon: item.icon.replace("lucide:", "i-lucide-"),
-      description: item.sub,
-      color: "text-red-500",
-      onSelect: () => navigateTo(item.to),
-    })),
-    [
-      {
-        label: "退出登录",
-        icon: "i-lucide-log-out",
-        color: "error",
-        onSelect: logoutClick,
-      },
-    ],
-  ];
-});
 const handleLoginModalOpen = () => {
   open();
 };
-
 // 退出登录
 const logoutClick = async () => {
   const confirmRes = await useConfirm()({

@@ -13,5 +13,5 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: '真假鉴别 · 避过' })
+useSeoMeta({ title: "真假鉴别 · 避过" });
 </script>

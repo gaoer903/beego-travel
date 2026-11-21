@@ -4,14 +4,17 @@
       <div>
         <h2 class="heading-2 flex items-center gap-2">
           <span
-            class="inline-block h-5 w-1.5 rounded-full bg-brand-500"
+            class="bg-brand-500 inline-block h-5 w-1.5 rounded-full"
             aria-hidden="true"
           />
           今日已核实
         </h2>
-        <p class="mt-1 text-xs text-muted">数据团队核实 · 每日更新</p>
+        <p class="text-muted mt-1 text-xs">数据团队核实 · 定期更新</p>
       </div>
-      <NuxtLink to="/incidents" class="text-sm text-brand-600 hover:underline">
+      <NuxtLink
+        to="/incidents"
+        class="text-brand-600 text-sm hover:underline"
+      >
         查看全部 →
       </NuxtLink>
     </div>
@@ -27,5 +30,5 @@
 </template>
 
 <script setup lang="ts">
-import { MOCK_INCIDENTS } from '~/utils/mock'
+import { MOCK_INCIDENTS } from "~/utils/mock";
 </script>

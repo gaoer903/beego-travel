@@ -1,11 +1,11 @@
-import type { NuxtPage } from '@nuxt/schema'
+import type { NuxtPage } from "@nuxt/schema";
 
-import { homeRoutes } from './home'
-import { toolsRoutes } from './tools'
-import { contentRoutes } from './content'
-import { legacyRoutes } from './legacy'
-import { userRoutes } from './user'
-import { businessRoutes } from './business'
+import { homeRoutes } from "./home";
+import { toolsRoutes } from "./tools";
+import { contentRoutes } from "./content";
+import { legacyRoutes } from "./legacy";
+import { userRoutes } from "./user";
+import { businessRoutes } from "./business";
 
 /**
  * 自定义路由总表
@@ -24,4 +24,4 @@ export const customRoutes: NuxtPage[] = [
   ...legacyRoutes,
   ...userRoutes,
   ...businessRoutes,
-]
+];

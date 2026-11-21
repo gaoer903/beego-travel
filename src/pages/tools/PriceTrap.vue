@@ -13,5 +13,5 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: '消费陷阱监控 · 避过' })
+useSeoMeta({ title: "消费陷阱监控 · 避过" });
 </script>

@@ -3,43 +3,62 @@
     <div class="mb-3 flex items-center justify-between">
       <div>
         <h3 class="heading-3">高风险城市 TOP5</h3>
-        <p class="mt-0.5 text-xs text-muted">近 7 天投诉密度排名</p>
+        <p class="text-muted mt-0.5 text-xs">近 7 天投诉密度排名</p>
       </div>
-      <Icon name="lucide:trophy" size="20" class="text-amber-500" />
+      <Icon
+        name="lucide:trophy"
+        size="20"
+        class="text-amber-500"
+      />
     </div>
 
-    <ul class="flex flex-col justify-between flex-1 divide-y divide-gray-100">
+    <ul class="flex flex-1 flex-col justify-between divide-y divide-gray-100">
       <li
         v-for="(item, index) in computedRiskCities"
-        :key="index"
+        :key="item.id"
         class="flex items-center gap-3 py-3"
       >
-        <span
-          class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold"
-          :class="item.tagType === 'danger' ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-600'"
-        >
-          {{ index + 1 }}
-        </span>
         <NuxtLink
-          :to="`/cities/${item.name}`"
-          class="flex-1 truncate text-[15px] font-semibold text-gray-900 hover:text-brand-700"
+          :to="cityDetailTo(item)"
+          class="hover:text-brand-700 flex min-w-0 flex-1 items-center gap-3 text-gray-900"
         >
-          {{ item.name }}
+          <span
+            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold"
+            :class="
+              item.tagType === 'danger' ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-600'
+            "
+          >
+            {{ index + 1 }}
+          </span>
+          <span class="flex-1 truncate text-[15px] font-semibold">
+            {{ item.name }}
+          </span>
+          <span :class="item.tagClass">{{ item.tag }}</span>
+          <Icon
+            name="lucide:chevron-right"
+            size="16"
+            class="text-gray-300"
+          />
         </NuxtLink>
-        <span :class="item.tagClass">{{ item.tag }}</span>
         <button
-          class="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-gray-500 hover:bg-gray-100 hover:text-brand-700"
-          @click="handleSubscribe(item.name)"
+          type="button"
+          class="hover:text-brand-700 inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-xs text-gray-500 hover:bg-gray-100"
+          @click.stop="handleSubscribe(item.name)"
         >
-          <Icon name="lucide:bell" size="14" />
+          <Icon
+            name="lucide:bell"
+            size="14"
+          />
           监测
         </button>
-        <Icon name="lucide:chevron-right" size="16" class="text-gray-300" />
       </li>
     </ul>
 
     <div class="mt-3 text-center">
-      <NuxtLink to="/cities" class="text-sm text-brand-600 hover:underline">
+      <NuxtLink
+        to="/cities"
+        class="text-brand-600 text-sm hover:underline"
+      >
         查看全部城市榜单 →
       </NuxtLink>
     </div>
@@ -47,7 +66,6 @@
 </template>
 
 <script setup lang="ts">
-import { MOCK_CITY_RANK, riskTone } from "~/utils/mock";
 import type { CityRecord, CityRecordWithTag } from "~/types/index";
 import { getCityRiskTag } from "~/utils/dataProcess/index";
 
@@ -63,6 +81,11 @@ const computedRiskCities = computed<CityRecordWithTag[]>(() => {
       ...tagObj,
     };
   });
+});
+
+const cityDetailTo = (city: CityRecord) => ({
+  name: "cities-detail",
+  params: { slug: city.slug },
 });
 
 const handleSubscribe = (city: string) => {

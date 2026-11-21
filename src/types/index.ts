@@ -79,12 +79,21 @@ export interface CityRank {
 export interface CityRecord {
   id: string | number;
   name: string;
+  slug: string;
   province: string;
   risk_score: number;
   report_count: number;
   latitude: number;
   longitude: number;
   custom_tag?: string;
+  updated_at: string;
+}
+
+// 上报页城市下拉选项：只含选择器需要的字段（对应 /api/cities/options）
+export interface CityOption {
+  id: string | number;
+  name: string;
+  province: string;
 }
 
 export interface CityRecordWithTag extends CityRecord {
@@ -112,11 +121,14 @@ export interface MyPitfallItem {
   status: "active" | "auditing" | "resolved"; // 严格对应 check_status
   created_at: string;
   user_nickname: string | null;
+  user_id: string | null; // 真实归属：auth.users 的 UUID（历史匿名数据可能为 null）
   is_anonymous: boolean | null;
   // 💡 关键：级联查询出来的 cities 对象类型
   cities: {
     name: string;
-  } | null;
+    latitude: number;
+    longitude: number;
+  };
 }
 
 /** 工具入口 */

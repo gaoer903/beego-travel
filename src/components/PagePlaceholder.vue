@@ -2,22 +2,32 @@
   <section class="section">
     <div class="container-page">
       <div class="mx-auto max-w-3xl">
-        <div
-          class="rounded-3xl border-2 border-dashed border-gray-200 bg-white p-12 text-center"
-        >
+        <div class="rounded-3xl border-2 border-dashed border-gray-200 bg-white p-12 text-center">
           <div
-            class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-600"
+            class="bg-brand-50 text-brand-600 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
           >
-            <Icon :name="props.icon" size="32" />
+            <Icon
+              :name="props.icon"
+              size="32"
+            />
           </div>
 
           <div class="mb-3 inline-flex items-center gap-2">
-            <el-tag size="small" type="warning" round>{{ props.tag }}</el-tag>
+            <el-tag
+              size="small"
+              type="warning"
+              round
+            >
+              {{ props.tag }}
+            </el-tag>
             <span class="text-sm text-gray-400">页面建设中</span>
           </div>
 
           <h1 class="heading-1">{{ props.title }}</h1>
-          <p v-if="props.subtitle" class="mt-3 text-lg text-muted">
+          <p
+            v-if="props.subtitle"
+            class="text-muted mt-3 text-lg"
+          >
             {{ props.subtitle }}
           </p>
 
@@ -25,7 +35,7 @@
             v-if="props.features.length"
             class="mx-auto mt-8 max-w-md rounded-xl bg-gray-50 p-5 text-left"
           >
-            <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">
+            <div class="mb-2 text-xs font-semibold tracking-wide text-gray-400 uppercase">
               规划中的功能
             </div>
             <ul class="space-y-2">
@@ -34,7 +44,11 @@
                 :key="i"
                 class="flex items-start gap-2 text-sm text-gray-700"
               >
-                <Icon name="lucide:circle-check" class="mt-0.5 text-brand-500" size="16" />
+                <Icon
+                  name="lucide:circle-check"
+                  class="text-brand-500 mt-0.5"
+                  size="16"
+                />
                 {{ f }}
               </li>
             </ul>
@@ -56,20 +70,20 @@
 
 <script setup lang="ts">
 interface Props {
-  icon?: string
-  title: string
-  subtitle?: string
-  tag?: string
-  features?: string[]
-  ctaText?: string
-  ctaTo?: string
+  icon?: string;
+  title: string;
+  subtitle?: string;
+  tag?: string;
+  features?: string[];
+  ctaText?: string;
+  ctaTo?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  icon: 'lucide:wrench',
-  tag: 'WIP',
+  icon: "lucide:wrench",
+  tag: "WIP",
   features: () => [],
-  ctaText: '返回首页',
-  ctaTo: '/',
-})
+  ctaText: "返回首页",
+  ctaTo: "/",
+});
 </script>

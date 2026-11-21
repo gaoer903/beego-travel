@@ -1,6 +1,20 @@
 <template>
-  <section class="hero relative" :style="{ backgroundImage: `url(${heroBgUrl})` }">
-    <div class="container-page relative pb-16 pt-14">
+  <section class="hero relative mx-auto w-full overflow-hidden bg-[#cfe8f5]">
+    <NuxtImg
+      src="/imgs/hero-bg.png"
+      alt=""
+      aria-hidden="true"
+      width="1920"
+      height="600"
+      format="webp"
+      densities="1x"
+      :preload="{ fetchPriority: 'high' }"
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
+      class="hero-bg pointer-events-none absolute inset-y-0 left-1/2 h-full w-480 max-w-none -translate-x-1/2 select-none object-cover object-center"
+    />
+    <div class="container-page relative z-10 pt-14 pb-16">
       <div class="flex flex-col items-center gap-4">
         <div class="flex items-end gap-4">
           <div class="speech text-2xl font-bold">今天你想避哪儿的坑？</div>
@@ -8,16 +22,17 @@
         </div>
         <p class="text-sm text-gray-600">
           基于
-          <b class="text-gray-800">12315</b>、<b class="text-gray-800">黑猫投诉</b>、<b
-            class="text-gray-800"
-            >文旅通报</b
-          >
+          <b class="text-gray-800">12315</b>
+          、
+          <b class="text-gray-800">黑猫投诉</b>
+          、
+          <b class="text-gray-800">文旅通报</b>
           等真实数据
         </p>
       </div>
 
       <div
-        class="mx-auto mt-8 max-w-3xl rounded-3xl border border-gray-100 bg-white/95 p-5 shadow-soft backdrop-blur-sm"
+        class="shadow-soft mx-auto mt-8 max-w-3xl rounded-3xl border border-gray-100 bg-white/95 p-5 backdrop-blur-sm"
       >
         <div class="mb-3 flex gap-6 border-b border-gray-100">
           <button
@@ -25,11 +40,14 @@
             :class="tab === 'destination' ? 'text-brand-700' : 'text-gray-500 hover:text-gray-900'"
             @click="tab = 'destination'"
           >
-            <Icon name="lucide:map-pin" size="16" />
+            <Icon
+              name="lucide:map-pin"
+              size="16"
+            />
             目的地
             <span
               v-if="tab === 'destination'"
-              class="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-brand-500"
+              class="bg-brand-500 absolute inset-x-0 -bottom-px h-0.5 rounded-full"
             />
           </button>
           <button
@@ -37,11 +55,14 @@
             :class="tab === 'merchant' ? 'text-brand-700' : 'text-gray-500 hover:text-gray-900'"
             @click="tab = 'merchant'"
           >
-            <Icon name="lucide:store" size="16" />
+            <Icon
+              name="lucide:store"
+              size="16"
+            />
             商户 / 景点
             <span
               v-if="tab === 'merchant'"
-              class="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-brand-500"
+              class="bg-brand-500 absolute inset-x-0 -bottom-px h-0.5 rounded-full"
             />
           </button>
         </div>
@@ -56,11 +77,21 @@
             @keyup.enter="handleSubmit"
           >
             <template #prefix>
-              <Icon name="lucide:search" size="16" class="text-gray-400" />
+              <Icon
+                name="lucide:search"
+                size="16"
+                class="text-gray-400"
+              />
             </template>
           </el-input>
-          <button class="btn-brand px-7" @click="handleSubmit">
-            <Icon name="lucide:zap" size="16" />
+          <button
+            class="btn-brand px-7"
+            @click="handleSubmit"
+          >
+            <Icon
+              name="lucide:zap"
+              size="16"
+            />
             立即避过
           </button>
         </div>
@@ -70,7 +101,7 @@
           <button
             v-for="kw in HOT_SEARCHES"
             :key="kw"
-            class="rounded-full bg-gray-100 px-2.5 py-1 text-gray-600 transition hover:bg-brand-50 hover:text-brand-700"
+            class="hover:bg-brand-50 hover:text-brand-700 rounded-full bg-gray-100 px-2.5 py-1 text-gray-600 transition"
             @click="handleHotClick(kw)"
           >
             {{ kw }}
@@ -83,7 +114,6 @@
 
 <script setup lang="ts">
 import { HOT_SEARCHES } from "~/utils/mock";
-import heroBgUrl from "~/assets/images/hero-bg.png";
 
 const tab = ref<"destination" | "merchant">("destination");
 const keyword = ref("");
@@ -108,14 +138,3 @@ const handleHotClick = (kw: string) => {
   handleSubmit();
 };
 </script>
-
-<style scoped>
-.hero {
-  width: 1200px;
-  margin: 0 auto;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 1920px auto;
-  background-color: #cfe8f5; /* 兜底色 = 头图天空色 */
-}
-</style>
