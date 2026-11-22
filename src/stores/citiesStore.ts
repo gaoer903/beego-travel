@@ -17,8 +17,8 @@ export const useCitiesStore = defineStore(
     };
   },
   {
-    persist: {
-      storage: piniaPluginPersistedstate.localStorage(),
-    },
+    persist: process.client ? {
+      storage: localStorage,
+    } : false,
   }
 );
