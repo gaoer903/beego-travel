@@ -48,9 +48,11 @@ export const useUserStore = defineStore(
     };
   },
   {
-    persist: process.client ? {
-      pick: ["user", "token"],
-      storage: localStorage,
-    } : false,
+    persist: process.client
+      ? {
+          pick: ["user", "token"],
+          storage: localStorage,
+        }
+      : false,
   }
 );
