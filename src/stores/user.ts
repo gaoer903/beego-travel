@@ -48,9 +48,9 @@ export const useUserStore = defineStore(
     };
   },
   {
-    persist: {
+    persist: process.client ? {
       pick: ["user", "token"],
-      storage: piniaPluginPersistedstate.localStorage(),
-    },
+      storage: localStorage,
+    } : false,
   }
 );
