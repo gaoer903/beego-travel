@@ -6,5 +6,5 @@ import { view } from "./resolver";
  */
 export const homeRoutes: NuxtPage[] = [
   { name: "home", path: "/", file: view("home/Index.vue") },
-  { name: "web-learning", path: "/web-learning", file: view("web/Index.vue") },
+  // { name: "web-learning", path: "/web-learning", file: view("web/Index.vue") },
 ];
