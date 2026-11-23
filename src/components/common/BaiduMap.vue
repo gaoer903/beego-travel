@@ -10,13 +10,12 @@
     >
       <Marker :position="{ lng: 116.404, lat: 39.915 }" />
       <NavigationControl />
-      <!-- <ScaleControl /> -->
     </MapContainer>
   </BMapProvider>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRuntimeConfig } from "#app";
 import { BMapProvider, Marker, NavigationControl } from "@baidumap/vue-bmap";
 import MapContainer from "./MapContainer.vue";
