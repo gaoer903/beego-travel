@@ -1,5 +1,4 @@
 import type { NuxtPage } from "@nuxt/schema";
-import { view } from "./resolver";
 
 /**
  * 早期版本遗留路由
@@ -7,11 +6,11 @@ import { view } from "./resolver";
  * - 后续逐步合并到 content/* 后可下线
  */
 export const legacyRoutes: NuxtPage[] = [
-  { name: "spots", path: "/spots", file: view("spots/Index.vue") },
-  { name: "spots-detail", path: "/spots/:id", file: view("spots/Detail.vue") },
-  { name: "assess", path: "/assess", file: view("assess/Index.vue") },
-  { name: "assess-detail", path: "/assess/:id", file: view("assess/Detail.vue") },
-  { name: "cases", path: "/cases", file: view("cases/Index.vue") },
-  { name: "cases-detail", path: "/cases/:id", file: view("cases/Detail.vue") },
-  { name: "blacklist", path: "/blacklist", file: view("blacklist/Index.vue") },
+  { name: "spots", path: "/spots", file: "@pages/spots/Index.vue" },
+  { name: "spots-detail", path: "/spots/:id", file: "@pages/spots/Detail.vue" },
+  { name: "assess", path: "/assess", file: "@pages/assess/Index.vue" },
+  { name: "assess-detail", path: "/assess/:id", file: "@pages/assess/Detail.vue" },
+  { name: "cases", path: "/cases", file: "@pages/cases/Index.vue" },
+  { name: "cases-detail", path: "/cases/:id", file: "@pages/cases/Detail.vue" },
+  { name: "blacklist", path: "/blacklist", file: "@pages/blacklist/Index.vue" },
 ];
