@@ -37,6 +37,8 @@
 </template>
 
 <script setup lang="ts">
+import { useConfirmState, resolveConfirm } from "~/composables/useConfirm";
+
 const confirmState = useConfirmState();
 
 const handleConfirm = () => {
