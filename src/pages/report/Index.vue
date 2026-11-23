@@ -205,7 +205,8 @@ import type { MyPitfallItem } from "~/types";
 import type { FormError } from "@nuxt/ui";
 import { useAuth } from "@composables/useAuth";
 import { useCityOptions } from "@composables/useCityOptions";
-import BaiduMap from "@components/common/BaiduMap.vue";
+
+const BaiduMap = defineAsyncComponent(() => import("@components/common/BaiduMap.vue"));
 
 const supabase = useSupabaseClient();
 const toast = useToast(); // 使用 Nuxt UI 自带的轻提示组件
