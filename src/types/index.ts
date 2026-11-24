@@ -239,3 +239,12 @@ export interface PitCase {
   views: number;
   createdAt: string;
 }
+
+export interface RiskCitiesResponse {
+  data: CityRecord[];
+  meta: {
+    cache: "hit" | "miss" | "bypass";
+    key: string;
+    ttl: number;
+  };
+}
