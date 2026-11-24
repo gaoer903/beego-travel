@@ -15,7 +15,7 @@
           v-for="group in footerLinks"
           :key="group.title"
         >
-          <h4 class="text-sm font-semibold text-gray-900">{{ group.title }}</h4>
+          <p class="text-sm font-semibold text-gray-900">{{ group.title }}</p>
           <ul class="mt-3 space-y-2">
             <li
               v-for="link in group.links"

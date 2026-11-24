@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CityRecord } from "~/types";
+import type { CityRecord, RiskCitiesResponse } from "~/types";
 import { useCitiesStore } from "@stores/citiesStore";
 const RiskMap = defineAsyncComponent(() => import("@components/maps/RiskMap.vue"));
 
@@ -37,20 +37,10 @@ useSeoMeta({
     "基于 12315、黑猫投诉、文旅通报等真实数据的城市避雷工具。今日已核实雷点、踩坑墙、避雷地图、行前清单一站搞定。",
 });
 
-interface RiskCitiesResponse {
-  data: CityRecord[];
-  meta: {
-    cache: "hit" | "miss" | "bypass";
-    key: string;
-    ttl: number;
-  };
-}
-
 const { data: cities } = await useAsyncData<CityRecord[]>("cities", async () => {
-  const response = await $fetch<RiskCitiesResponse>("/api/home/risk-cities");
-  citiesStore.updateCitiesList(response.data);
+  const updatedCitiesRes = await citiesStore.updateCitiesList();
 
-  return response.data;
+  return updatedCitiesRes;
 });
 
 const riskCities = computed(() => cities.value?.slice(0, 5) ?? []);
