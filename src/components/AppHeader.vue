@@ -54,7 +54,7 @@
             content: 'w-56 rounded-lg shadow-lg',
           }"
         >
-          <a
+          <button
             class="bg-brand-50 text-brand-700 hover:bg-brand-100 flex cursor-pointer items-center gap-1.5 rounded-full px-2 py-2.5 text-[12px] font-medium transition-colors"
           >
             <Icon
@@ -67,7 +67,7 @@
               size="12"
               class="text-brand-700/70"
             />
-          </a>
+          </button>
         </UDropdownMenu>
 
         <UPopover

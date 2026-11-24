@@ -78,6 +78,21 @@ export default defineNuxtConfig({
   },
 
   hooks: {
+    // ✅ 新增：区分 client/server 构建，分别生成分析报告
+    "vite:extendConfig"(config, { isClient }) {
+      if (process.env.ANALYZE === "true") {
+        config.plugins = config.plugins || [];
+        config.plugins.push(
+          visualizer({
+            filename: isClient ? "stats/client.html" : "stats/server.html",
+            template: "treemap",
+            gzipSize: true,
+            brotliSize: true,
+            open: false,
+          })
+        );
+      }
+    },
     /**
      * pages:extend 在构建期触发。本项目通过 dir.pages 禁用了 Nuxt 的
      * 自动扫描，初始 pages = []，这里 push 我们 app/router/ 下声明的
@@ -122,18 +137,19 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins:
-      process.env.ANALYZE === "true"
-        ? [
-            visualizer({
-              filename: "stats/client.html",
-              template: "treemap",
-              gzipSize: true,
-              brotliSize: true,
-              open: true,
-            }),
-          ]
-        : [],
+    build: {
+      // 拆包
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // 拆出supabase模块
+            if (id.includes("@supabase")) {
+              return "vendor-supabase";
+            }
+          },
+        },
+      },
+    },
   },
 
   nitro: {
